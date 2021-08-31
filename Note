@@ -1,0 +1,21 @@
+After create laravel and model, controller and model
+
+Next Sanctum Authentication
+
+composer require laravel/sanctum
+
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+
+php artisan migrate
+
+add the code below to kernel.php
+'api' => [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:api',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
+
+Add this to User.php models
+use Laravel\Sanctum\HasApiTokens;  
+
+Create AuthController

@@ -19,3 +19,5 @@ Add this to User.php models
 use Laravel\Sanctum\HasApiTokens;  
 
 Create AuthController
+
+php artisan make:mail SignupEmail

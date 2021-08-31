@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Mail\SignupEmail;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
@@ -47,7 +49,11 @@ class AuthController extends Controller
         ]);
 
         $token = $user->createToken('myAppToken')->plainTextToken; //myAppToken could be anything
-
+        $data = [
+            'name' => $user->name,
+            'token' => $token
+        ];
+        Mail::to('onayemi18@gmail.com')->send(new SignupEmail($data));
         $response = [
             'user' => $user,
             'token' => $token
